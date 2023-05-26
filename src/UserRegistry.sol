@@ -1,10 +1,18 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
+
+
+interface IGovernanceToken {
+    function safeMint(address to) external returns (uint256); 
+}
+
 contract UserRegistry {
 
     address owner;
     address handler;
+    address governanceToken;
 
     struct User {
         /* string name; */
@@ -16,6 +24,8 @@ contract UserRegistry {
         uint256 appreciationsGiven;
         uint256 takenAmt;
         uint256 givenAmt;
+        uint256 tokenId;
+        bool tokenHolder;
     }
 
     mapping(address => User) users;
@@ -34,9 +44,18 @@ contract UserRegistry {
         require(msg.sender == handler, des);
         _;
     }
+    
+    modifier onlyGovernanceToken(string memory des) {
+        require(msg.sender == governanceToken, des);
+        _;
+    }
 
     function setHandler(address _handler) public onlyOwner("Only owner can update handler") {
         handler = _handler;
+    }
+
+    function setGovernanceToken(address _tokenAddr) external onlyOwner("Only owner can update governanceTokenAddr") {
+        governanceToken = _tokenAddr;
     }
 
     function registerUser() external {
@@ -50,7 +69,9 @@ contract UserRegistry {
             0,
             0,
             0 wei,
-            0 wei
+            0 wei,
+            0,
+            false
         );
         emit UserRegistered(msg.sender);
     }
@@ -87,8 +108,21 @@ contract UserRegistry {
         user.contributionBalance += fee;
     }
 
+    function setTokenId(address _user, uint256 _tokenId) external {
+        IERC721 nft = IERC721(governanceToken);
+        require(_user == nft.ownerOf(_tokenId), "Token owner can update details");
+        User storage user = users[_user];
+        user.tokenId = _tokenId;
+        user.tokenHolder = true;
+    }
+
     function getUserDetails(address user) external view returns (User memory) {
         return users[user];
+    }
+
+    function mintCaringToken() external {
+        IGovernanceToken tokenContract = IGovernanceToken(governanceToken); 
+        tokenContract.safeMint(msg.sender);
     }
 
     /* function generateRandomUsername() internal view returns (string memory) {

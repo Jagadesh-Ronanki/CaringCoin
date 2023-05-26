@@ -11,6 +11,7 @@ interface IUserRegistry {
         uint256 appreciationsGiven;
         uint256 takenAmt;
         uint256 givenAmt;
+        bool tokenHolder;
     }
 
     function getUserDetails(address user) external view returns (User memory);

@@ -13,6 +13,8 @@ interface IUserRegistry {
         uint256 appreciationsGiven;
         uint256 takenAmt;
         uint256 givenAmt;
+        uint256 tokenId;
+        bool tokenHolder;
     }
     function updateAppreciator(address appreciator, uint256 amt) external returns (bool);
     function updateCreator(address creator, uint256) external returns (bool);
@@ -24,20 +26,24 @@ interface IPriceConversion {
     function UsdtoEth(uint256) external returns (uint256);
 }
 
-event receivedAmt(address indexed creator, address indexed appreciator, uint256 amount);
-event withdrawAmt(address indexed creator, uint256 amount);
-
 contract Handler is Ownable {
     IUserRegistry userRegistry;
     IPriceConversion priceConvertor;
-    uint256 public baseThreshold = 10; // USD
+    uint256 private baseThreshold = 3; // USD
 
     event AddedFunds(address indexed sender, uint256 amount);
 
-    constructor(address _userRegistryAddr, address _priceConversionAddr) {
+    constructor() {
+    }
+
+    function setUserRegistry(address _userRegistryAddr) external onlyOwner {
         userRegistry = IUserRegistry(_userRegistryAddr);
+    }
+    
+    function setPriceConversion(address _priceConversionAddr) external onlyOwner {
         priceConvertor = IPriceConversion(_priceConversionAddr);
     }
+    
     
     function receiveAmount(address creator, address appreciator) external payable returns (bool) {
         uint256 level = userRegistry.getUserDetails(creator).level;
@@ -49,7 +55,6 @@ contract Handler is Ownable {
         bool updatedAppreciator = userRegistry.updateAppreciator(appreciator, msg.value);    
         require(updatedAppreciator, "Failed to update creator");
 
-        emit receivedAmt(creator, appreciator, msg.value);
         return true;
     }
 
@@ -65,12 +70,10 @@ contract Handler is Ownable {
         uint256 amt = withdrawalThresholdInEth - fee;
         (bool success, ) = payable(creator).call{value: amt}("");
         require(success, "Withdrawal failed");
-
-        emit withdrawAmt(creator, amt);
         return success;
     }
 
-    function calculateWithdrawalThreshold(uint256 level) internal returns (uint256) {
+    function calculateWithdrawalThreshold(uint256 level) internal view returns (uint256) {
         uint256 _threshold = baseThreshold;
         for (uint256 i = 2; i <= level; i++) {
             uint256 percentageIncrease = _threshold * 10 / 100;
@@ -78,6 +81,10 @@ contract Handler is Ownable {
         }
 
         return _threshold;
+    }
+
+    function getBaseThreshold() public view returns (uint256) {
+        return baseThreshold;
     }
 
     function UpdateBaseThreshold(uint256 _value) public onlyOwner {
