@@ -5,6 +5,7 @@ libs = ['lib']
 gas_reports = ["*"]
 optimizer = true
 optimizer_runs = 20000
+via-ir = true
 
 # Remappings in remappings.txt
 

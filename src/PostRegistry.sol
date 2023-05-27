@@ -22,6 +22,8 @@ interface IHandler {
 }
 
 contract PostRegistry {
+    address owner;
+
     struct Post {
         uint256 id;
         address creator;
@@ -38,8 +40,20 @@ contract PostRegistry {
 
     event PostCreated(uint256 indexed postId, address indexed creator, string content);
 
-    constructor(address _handlerAddr, address _userRegistryAddr) {
+    constructor() {
+        owner = msg.sender;
+    }
+
+    modifier onlyOwner {
+        require(owner == msg.sender, "Only owner can access");
+        _;       
+    }
+
+    function setHandler(address _handlerAddr) external onlyOwner {
         handler = IHandler(_handlerAddr);
+    }
+
+    function setUserRegistry(address _userRegistryAddr) external onlyOwner {
         userRegistry = IUserRegistry(_userRegistryAddr);
     }
 
@@ -64,5 +78,9 @@ contract PostRegistry {
         bool sent = handler.receiveAmount{value: msg.value}(creator, msg.sender);
         require(sent, "Post: appreciation failed");
         return true;
+    }
+
+    function getPost(uint256 postId) public view returns (Post memory) {
+        return posts[postId];
     }
 }

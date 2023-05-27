@@ -26,10 +26,17 @@ interface IPriceConversion {
     function UsdtoEth(uint256) external returns (uint256);
 }
 
+interface IVariables {
+    function retriveBaseThreshold() external view returns (uint256);
+    function retrivePerWithdrawal() external view returns (uint256);
+}
+
 contract Handler is Ownable {
     IUserRegistry userRegistry;
     IPriceConversion priceConvertor;
-    uint256 private baseThreshold = 3; // USD
+    IVariables variables;
+    // @TODO VARIABLE 3
+    // uint256 private baseThreshold = 3; // USD
 
     event AddedFunds(address indexed sender, uint256 amount);
 
@@ -43,7 +50,10 @@ contract Handler is Ownable {
     function setPriceConversion(address _priceConversionAddr) external onlyOwner {
         priceConvertor = IPriceConversion(_priceConversionAddr);
     }
-    
+
+    function setVariables(address _variables) external onlyOwner {
+        variables = IVariables(_variables);
+    }    
     
     function receiveAmount(address creator, address appreciator) external payable returns (bool) {
         uint256 level = userRegistry.getUserDetails(creator).level;
@@ -65,7 +75,9 @@ contract Handler is Ownable {
         uint256 withdrawalThreshold = calculateWithdrawalThreshold(level);
         uint256 withdrawalThresholdInEth = priceConvertor.UsdtoEth(withdrawalThreshold);
         require(withdrawalThresholdInEth <= appreciationBalance, "Withdrawal threshold not met");
-        uint256 fee = withdrawalThresholdInEth * 10 / 100;
+        // @TODO Variable perWithdrawal 10
+        uint256 perWithdrawal = variables.retrivePerWithdrawal();
+        uint256 fee = withdrawalThresholdInEth * perWithdrawal / 100;
         userRegistry.withdraw(creator, fee, withdrawalThresholdInEth);
         uint256 amt = withdrawalThresholdInEth - fee;
         (bool success, ) = payable(creator).call{value: amt}("");
@@ -74,21 +86,20 @@ contract Handler is Ownable {
     }
 
     function calculateWithdrawalThreshold(uint256 level) internal view returns (uint256) {
-        uint256 _threshold = baseThreshold;
+        uint256 _threshold = variables.retriveBaseThreshold();
+        // @TODO Variable perWithdrawal 10
+        uint256 perWithdrawal = variables.retrivePerWithdrawal();
         for (uint256 i = 2; i <= level; i++) {
-            uint256 percentageIncrease = _threshold * 10 / 100;
+            uint256 percentageIncrease = _threshold * perWithdrawal / 100;
             _threshold += percentageIncrease;
         }
 
         return _threshold;
     }
 
+    // @TODO remove these utilities add in Variables.sol
     function getBaseThreshold() public view returns (uint256) {
-        return baseThreshold;
-    }
-
-    function UpdateBaseThreshold(uint256 _value) public onlyOwner {
-        baseThreshold = _value;
+        return variables.retriveBaseThreshold();
     }
     
     receive() external payable {

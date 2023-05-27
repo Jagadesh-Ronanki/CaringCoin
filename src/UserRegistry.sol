@@ -3,7 +3,6 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
-
 interface IGovernanceToken {
     function safeMint(address to) external returns (uint256); 
 }
@@ -28,7 +27,7 @@ contract UserRegistry {
         bool tokenHolder;
     }
 
-    mapping(address => User) users;
+    mapping(address => User) public users;
     event UserRegistered(address indexed id);
 
     constructor() {
@@ -108,7 +107,7 @@ contract UserRegistry {
         user.contributionBalance += fee;
     }
 
-    function setTokenId(address _user, uint256 _tokenId) external {
+    function setTokenId(address _user, uint256 _tokenId) external onlyGovernanceToken("Only governance token can update tokenId") {
         IERC721 nft = IERC721(governanceToken);
         require(_user == nft.ownerOf(_tokenId), "Token owner can update details");
         User storage user = users[_user];
