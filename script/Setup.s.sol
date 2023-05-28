@@ -3,6 +3,7 @@ pragma solidity ^0.8.0;
 
 import "forge-std/Script.sol";
 import "forge-std/console.sol";
+import '../src/GovernorContract.sol';
 
 interface IConstants {
   function getPriceConversion() external view returns (address);
@@ -10,7 +11,13 @@ interface IConstants {
   function getPostRegistry() external view returns (address);
   function getHandler() external view returns (address);
   function getGovernanceToken() external view returns (address);
+  function getGovernor() external view returns (address);
+  function getTimeLock() external view returns (address);
   function getVariables() external view returns (address);
+  function MIN_DELAY() external pure returns (uint256);
+  function VOTING_DELAY() external pure returns (uint256);
+  function VOTING_PERIOD() external pure returns (uint256);
+  function QUORUM_PERCENTAGE() external pure returns (uint256);
 }
 
 interface IUserRegistry {
@@ -67,11 +74,18 @@ interface IGovernanceToken {
   function safeMint(address to) external;
   function setUserRegistry(address _userRegistry) external;
   function setVariables(address _variables) external;
+  function delegate(address delegatee) external;
 }
 
+interface IVariables {
+  function retriveBaseThreshold() external view returns (uint256);
+}
 // END OF INTERFACES =======================
 
 contract Setup is Script {
+  bytes[] functionCalls;
+  address[] addressesToCall;
+  uint256[] values;
   function run() external {
     address _constants = vm.envAddress("CONSTANTS_ADDRESS");
     IConstants constants = IConstants(_constants);
@@ -195,11 +209,57 @@ contract Setup is Script {
     // mint CaringToken
     vm.startBroadcast(postCreator);
     govToken.safeMint(postCreator);
-    
+    govToken.delegate(postCreator);
     IUserRegistry.User memory creatorDetails = userRegistry.getUserDetails(postCreator);
     uint256 tokenId = creatorDetails.tokenId;
     console.log("TokenId: ", tokenId);
     vm.stopBroadcast();
+
+    // governor propose change in variables
+    address governorAddr = constants.getGovernor();
+    GovernorContract governor = GovernorContract(payable(governorAddr));
+
+    uint256 valueToStore = 2;
+    string memory description = "Like to reduce threshold to 2";
+    bytes memory encodedFunctionCall = abi.encodeWithSignature("storeBaseThreshold(uint256)", valueToStore);
+    addressesToCall.push(variablesAddr);
+    values.push(0);
+    functionCalls.push(encodedFunctionCall);
+    
+    // 1. Propose to the DAO
+    uint256 proposalId = governor.propose(addressesToCall, values, functionCalls, description);
+    console.log("Proposal State:", uint256(governor.state(proposalId)));
+
+    uint256 VOTING_DELAY = constants.VOTING_DELAY();
+    vm.warp(block.timestamp + VOTING_DELAY + 1);
+    vm.roll(block.number + VOTING_DELAY + 1);
+    console.log("Proposal State:", uint256(governor.state(proposalId)));
+
+    // 2. Vote
+    string memory reason = "I like a do da cha cha";
+    // 0 = Against, 1 = For, 2 = Abstain for this example
+    uint8 voteWay = 1;
+    vm.prank(postCreator);
+    governor.castVoteWithReason(proposalId, voteWay, reason);
+
+    uint256 VOTING_PERIOD = constants.VOTING_PERIOD();
+    vm.warp(block.timestamp + VOTING_PERIOD + 1);
+    vm.roll(block.number + VOTING_PERIOD + 1);
+    console.log("Proposal State:", uint256(governor.state(proposalId)));
+
+    // 3. Queue
+    bytes32 descriptionHash = keccak256(abi.encodePacked(description));
+    governor.queue(addressesToCall, values, functionCalls, descriptionHash);
+    uint256 MIN_DELAY = constants.MIN_DELAY();
+    vm.warp(block.timestamp + MIN_DELAY + 1);
+    vm.roll(block.number + MIN_DELAY + 1);
+
+     // 4. Execute
+    governor.execute(addressesToCall, values, functionCalls, descriptionHash);
+
+    // check
+    IVariables variables = IVariables(variablesAddr);
+    console.log(variables.retriveBaseThreshold());
   }
 }
 

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
-pragma solidity 0.8.9;
+pragma solidity ^0.8.0;
 
 import 'forge-std/Script.sol';
 import 'forge-std/console.sol';
@@ -26,20 +26,9 @@ contract DeployGovernorContract is Script{
     address _constants = vm.envAddress("CONSTANTS_ADDRESS");
     IConstants constants = IConstants(_constants);
 
-    // governance token address
-    /* address governanceTokenAddress = vm.parseAddress(vm.envString("GOVERNANCE_TOKEN"));
-    GovernanceToken governanceToken = GovernanceToken(governanceTokenAddress);
-    IVotes token = IVotes(governanceToken); */
-
     address governanceTokenAddress = constants.getGovernanceToken();
     GovernanceToken governanceToken = GovernanceToken(governanceTokenAddress);
     console.log("Governance_address: ", address(governanceToken));
-    
-    // timelock address
-    /* address timeLockAddress = vm.parseAddress(vm.envString("TIMELOCK"));
-    TimeLock timeLock = TimeLock(payable(timeLockAddress));
-    console.log("timelockaddress: ", address(timeLock));
- */
 
     address timeLockAddress = constants.getTimeLock();
     TimeLock timeLock = TimeLock(payable(timeLockAddress));
@@ -51,7 +40,6 @@ contract DeployGovernorContract is Script{
 
     GovernorContract governorContract = new GovernorContract(governanceToken, timeLock, quorumPercentage, votingPeriod, votingDelay);
     console.log("Governor deployed at ", address(governorContract));
-    /* vm.setEnv("GOVERNOR", vm.toString(address(governorContract))); */
 
     constants.setGovernor(payable(address(governorContract)));
   }

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
-pragma solidity 0.8.9;
+pragma solidity ^0.8.0;
 
 import 'forge-std/Script.sol';
 import 'forge-std/console.sol';
@@ -25,6 +25,6 @@ contract DeployTimeLock is Script {
     uint256 minDelay = constants.MIN_DELAY();
     TimeLock timeLock = new TimeLock(minDelay, new address[](0), new address[](0), deployer);
     console.log("Timelock at ", address(timeLock));
-    constants.setTimeLock(address(timeLock));
+    constants.setTimeLock(payable(address(timeLock)));
   }
 }

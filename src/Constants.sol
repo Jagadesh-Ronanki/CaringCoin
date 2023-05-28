@@ -12,7 +12,7 @@ contract Constants {
   address public variablesAddr;
 
   uint256 public constant MIN_DELAY = 3600;
-  uint256 public constant VOTING_PERIOD = 5;
+  uint256 public constant VOTING_PERIOD = 50400;
   uint256 public constant VOTING_DELAY = 1;
   uint256 public constant QUORUM_PERCENTAGE = 4;
 

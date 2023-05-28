@@ -6,7 +6,7 @@ import 'forge-std/console.sol';
 import '../src/Variables.sol';
 
 interface IConstants {
-  // function getTimeLock() external returns (address);
+  function getTimeLock() external returns (address);
   function setVariables(address) external;
 }
 
@@ -17,7 +17,7 @@ contract DeployVariables is Script {
     vm.startBroadcast(deployerPrivateKey);
     address _constants = vm.envAddress("CONSTANTS_ADDRESS");
     IConstants constants = IConstants(_constants);
-    // address timeLockAddress = constants.getTimeLock();
+    address timeLockAddress = constants.getTimeLock();
 
     Variables variables = new Variables();
     address _variables = address(variables);
@@ -27,10 +27,11 @@ contract DeployVariables is Script {
     variables.storeLevelToGovern(2);
     variables.storeBaseThreshold(3);
     variables.storePerWithdrawal(10);
+    variables.transferOwnership(timeLockAddress);
+    console.log("Variables contract ownership transfered to ", timeLockAddress);
 
     vm.stopBroadcast();
 
-    // variables.transferOwnership(timeLockAddress);
-    // console.log("Variables contract ownership transfered to ", timeLockAddress);
+    
   }
 }
