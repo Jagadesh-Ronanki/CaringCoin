@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import 'forge-std/Script.sol';
 import 'forge-std/console.sol';
-import '../src/Variables.sol';
+import '../src/backend/contracts/_Variables.sol';
 
 interface IConstants {
   function getTimeLock() external returns (address);

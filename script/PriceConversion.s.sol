@@ -3,9 +3,9 @@ pragma solidity ^0.8.0;
 
 import "forge-std/Script.sol";
 import "forge-std/console.sol";
-import "../src/PriceConversion.sol";
+import "../src/backend/contracts/PriceConversion.sol";
 import "./HelperConfig.sol";
-import "../src/test/mocks/MockV3Aggregator.sol";
+import "../src/backend/test/mocks/MockV3Aggregator.sol";
 
 interface IConstants {
   function setPriceConversion(address) external;

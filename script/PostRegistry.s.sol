@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import "forge-std/Script.sol";
 import "forge-std/console.sol";
-import "../src/PostRegistry.sol";
+import "../src/backend/contracts/PostRegistry.sol";
 
 interface IConstants {
   function setPostRegistry(address) external;
