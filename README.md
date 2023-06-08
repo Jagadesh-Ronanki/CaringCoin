@@ -1,7 +1,7 @@
 > Our project is aiming for submission for Chainlink's Spring 2023 Virtual Hackathon. Join us in the Chainlink Spring 2023 Virtual Hackathon, sponsored by Chainlink to create unique solutions to real-world problems using their oracle technology and win prizes! Learn more at https://chain.link/hackathon.
 
-# Project: CaringCoin
-**CaringCoin** is a blockchain-based platform that allows you to showcase your skills and creativity in a game-like environment. By creating content similar to a social media platform, you can advance through different levels, earning progressively higher amounts of appreciation for your contributions.
+# Project: CaringDAO
+**CaringDAO** is a blockchain-based platform that allows you to showcase your skills and creativity in a game-like environment. By creating content similar to a social media platform, you can advance through different levels, earning progressively higher amounts of appreciation for your contributions.
 
 ## Problem statement
 We noticed that many people have unique talents and skills that they wish to showcase in public. However, it's not easy to get noticed, and there are very few platforms that actively incentivize contribution. We wanted to make a platform where anyone can be recognized for their skills and creativity.
