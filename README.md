@@ -4,18 +4,40 @@
 **CaringDAO** is a blockchain-based platform that allows you to showcase your skills and creativity in a game-like environment. By creating content similar to a social media platform, you can advance through different levels, earning progressively higher amounts of appreciation for your contributions.
 
 ## Problem statement
-We noticed that many people have unique talents and skills that they wish to showcase in public. However, it's not easy to get noticed, and there are very few platforms that actively incentivize contribution. We wanted to make a platform where anyone can be recognized for their skills and creativity.
 
-## Solution
-Our solution is a platform where users can create various forms of content, such as art, writing, and more. By giving appreciation to their content, other users can earn CaringCoins, which they can exchange for other crypto assets. Users can continue earning higher amounts of appreciation as they progress through the levels, earning a higher percentage of other users' appreciation with each level.
+There are particularly two areas of focus:
+1. Applications that incentivize individuals, such as YouTube, Instagram, and Twitter are under monopoly rule, effecting individuals
+2. We believe that wide adoption of Web 3 is possible by targeting and incentivizing individuals who provide real value.
+
+Also many people have unique talents and skills that they wish to showcase in public. However, it's not easy to get noticed, and there are very few platforms that actively incentivize contribution. We wanted to make a platform where anyone can be recognized for their skills and creativity.
+
+## Solution we propose
+**Caring DAO** introduces a gamified approach to work creation and incentivization through appreciations. Users can register on the platform and choose an image that will later be transformed into an NFT. By participating in the DAO, individuals gain access to a dashboard that provides a comprehensive overview of their actions and contributions.
+
+The platform incorporates advanced technologies such as Filecoin and IPFS to store and retrieve images securely. Users can appreciate the work of others by providing monetary contributions, which are seamlessly processed using **Chainlink USD/ETH price feed** for accurate conversions. As creators receive appreciations, they level up and gain various benefits within the DAO.
+
+**Withdrawal thresholds** are set to ensure that creators accumulate enough appreciations before they can withdraw their earnings. The project also includes a **governance aspect**, where users can participate in voting on proposals and contribute to the decision-making process.
+
+Additionally, Caring DAO allows creators to **mint their own Caring Power tokens**, symbolizing their active participation and dedication to the platform. These tokens serve as a badge of honor and gratitude from the DAO.
+
+### Architecture
+
+![flow1](https://github.com/Jagadesh-Ronanki/CaringDAO/assets/106180776/bc9585ea-d1da-469b-bee6-9f8c097c8dd4)
+![flow2](https://github.com/Jagadesh-Ronanki/CaringDAO/assets/106180776/bcdd41db-e0cd-4763-afe5-071e9ff5748f)
+![flow5](https://github.com/Jagadesh-Ronanki/CaringDAO/assets/106180776/46df2107-efcb-43c0-82eb-3932918d4767)
+![flow3](https://github.com/Jagadesh-Ronanki/CaringDAO/assets/106180776/fd186d88-ea96-4ec0-b701-133e15c06af9)
+![flow4](https://github.com/Jagadesh-Ronanki/CaringDAO/assets/106180776/7564b313-5981-415b-af05-54988ab88cdf)
+---
+
+By combining decentralized principles, gamification, and incentivization, Caring DAO aims to empower individuals, reward real value, and foster a vibrant and inclusive Web3 ecosystem.
 
 ### Technologies
-CaringCoin is built on top of the Ethereum blockchain, providing a secure and decentralized platform. Our frontend is developed using React/Next, allowing for a flexible and user-friendly interface. For smart contract development, we use Solidity, a widely-used language for blockchain-based contracts.
+CaringCoin is built on top of the Ethereum blockchain, Deployed on sepolia testnet. Our frontend is developed using React-Vite. For smart contract development, we use Solidity, a widely-used language for blockchain-based contracts. To store images and nft we used **filecoin** and **ipfs** through pinning api's web3.storage and nft.storage
 
 To convert various crypto assets into dollar amounts, we rely on Chainlink price feeds, which provide accurate and reliable conversion values.
 
 ### Dependencies
-Users interested in using CaringCoin will need to have a compatible Ethereum wallet installed on their device.
+Users interested in using CaringCoin will need to have a compatible Ethereum wallet installed on their device with sepolia testnet eth.
 
 Here's an example scenario of a user starting at level 0 and leveling up to level 1, with a withdrawal limit of 50 dollars and 10% of the amount being considered as a contributable amount to support other users:
 
@@ -27,7 +49,11 @@ Here's an example scenario of a user starting at level 0 and leveling up to leve
 
     User A decides to withdraw $50 of their earned cryptocurrency. Of the $50, 10% ($5) is considered as a contributable amount to support other users.
 
-    User A receives the remaining $45 in their wallet and can use it for various purposes.
+    User A receives the remaining $45 in their wallet.
+
+    Upon reaching level where it aligns with level-to-govern decided by governance. They can mint their nft.
+    
+    NFT gives you the voting power in DAO and shows your credibility.
 
 <!-- Installation and Usage
 To run CaringCoin, clone this repository and install the project dependencies using npm. Once installed, you can run the application from a terminal window using the command npm start.
@@ -37,6 +63,9 @@ To learn more about how to use CaringCoin, including how to create content and e
 
 License
 CaringCoin is licensed under the MIT License. -->
+
+Demo Video: https://youtu.be/L0gU4ISbyEQ
+Try it here: https://main--glittery-dodol-2dd517.netlify.app/
 
 ## How to Contribute
 We welcome contributions to CaringCoin in any form, including feedback, bug reports, and code contributions. To contribute, please follow these guidelines:
