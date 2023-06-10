@@ -1,3 +1,5 @@
+/* It's just another Governance token, this isn't necessary*/
+
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
