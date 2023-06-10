@@ -124,13 +124,4 @@ contract UserRegistry {
     function isRegistered(address _user) public view returns (bool) {
         return users[_user].registered;
     }
-
-    /* function generateRandomUsername() internal view returns (string memory) {
-        uint256 randomNumber = uint256(keccak256(abi.encodePacked(
-            block.timestamp,
-            msg.sender,
-            block.prevrandao
-        )));
-        return string(abi.encodePacked("User_", randomNumber));
-    } */
 }
