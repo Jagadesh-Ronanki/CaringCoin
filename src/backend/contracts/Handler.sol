@@ -98,11 +98,6 @@ contract Handler is Ownable {
 
         return _threshold;
     }
-
-    // @TODO remove these utilities add in Variables.sol
-    function getBaseThreshold() public view returns (uint256) {
-        return variables.retriveBaseThreshold();
-    }
     
     receive() external payable {
         emit AddedFunds(msg.sender, msg.value);
