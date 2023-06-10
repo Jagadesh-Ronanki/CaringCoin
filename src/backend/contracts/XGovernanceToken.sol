@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/draft-ERC721Votes.sol";
@@ -32,21 +30,25 @@ interface IVariables {
     function retriveLevelToGovern() external view returns (uint256);
 }
 
-contract GovernanceToken is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable, EIP712, ERC721Votes {
+contract GovernanceToken is ERC721, Ownable, EIP712, ERC721Votes {
     using Counters for Counters.Counter;
 
     Counters.Counter private _tokenIdCounter;
     IUserRegistry userRegistry;
     IVariables variables;
 
-    constructor() ERC721("CaringPower", "cp") EIP712("CaringPower", "1") {
-      _tokenIdCounter._value = 1;
+    constructor() ERC721("CaringPower", "CP") EIP712("CaringPower", "1") {
+        _tokenIdCounter._value = 1;
     }
 
     modifier onlyActiveParticipator(address to) {
-      require( !userRegistry.getUserDetails(to).tokenHolder, "~ You are already a token holder");
-      require(userRegistry.getUserDetails(to).level >= variables.retriveLevelToGovern(), "Reach threshold level to mint");
-      _;
+        // @TODO VARIABLE 2
+        require(userRegistry.getUserDetails(to).level >= variables.retriveLevelToGovern(), "Reach level 10 to mint");
+        _;
+    }
+
+    function _baseURI() internal pure override returns (string memory) {
+        return "https://caringcoin.infura-ipfs.io/ipfs/QmWroSNGfL5R7Bf4gH7rQLi4kgMa8HP2QnfanH8tqBtTDW";
     }
 
     function setUserRegistry(address _userRegistry) external onlyOwner {
@@ -57,23 +59,15 @@ contract GovernanceToken is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable,
         variables = IVariables(_variables);
     }
 
-    function safeMint(address to, string memory uri) public onlyActiveParticipator(to) {
+    function safeMint(address to) public onlyActiveParticipator(to) {
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
-        _setTokenURI(tokenId, uri);
         delegate(to);
         userRegistry.setTokenId(to, tokenId);
     }
 
     // The following functions are overrides required by Solidity.
-
-    function _beforeTokenTransfer(address from, address to, uint256 tokenId, uint256 batchSize)
-        internal
-        override(ERC721, ERC721Enumerable)
-    {
-        super._beforeTokenTransfer(from, to, tokenId, batchSize);
-    }
 
     function _afterTokenTransfer(address from, address to, uint256 tokenId, uint256 batchSize)
         internal
@@ -82,25 +76,7 @@ contract GovernanceToken is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable,
         super._afterTokenTransfer(from, to, tokenId, batchSize);
     }
 
-    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
-        super._burn(tokenId);
-    }
-
-    function tokenURI(uint256 tokenId)
-        public
-        view
-        override(ERC721, ERC721URIStorage)
-        returns (string memory)
-    {
-        return super.tokenURI(tokenId);
-    }
-
-    function supportsInterface(bytes4 interfaceId)
-        public
-        view
-        override(ERC721, ERC721Enumerable, ERC721URIStorage)
-        returns (bool)
-    {
-        return super.supportsInterface(interfaceId);
+    function supply() public view returns (uint256) {
+        return _tokenIdCounter.current();
     }
 }

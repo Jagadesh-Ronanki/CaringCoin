@@ -5,6 +5,8 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 interface IUserRegistry {
     struct User {
+        string name;
+        string profileCID;
         uint256 level;
         bool registered;
         uint256 appreciationBalance;
@@ -85,7 +87,7 @@ contract Handler is Ownable {
         return success;
     }
 
-    function calculateWithdrawalThreshold(uint256 level) internal view returns (uint256) {
+    function calculateWithdrawalThreshold(uint256 level) public view returns (uint256) {
         uint256 _threshold = variables.retriveBaseThreshold();
         // @TODO Variable perWithdrawal 10
         uint256 perWithdrawal = variables.retrivePerWithdrawal();

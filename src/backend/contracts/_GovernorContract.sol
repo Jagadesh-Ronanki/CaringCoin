@@ -10,6 +10,25 @@ import "@openzeppelin/contracts/governance/extensions/GovernorTimelockControl.so
 
 
 contract GovernorContract is Governor, GovernorSettings, GovernorCountingSimple, GovernorVotes, GovernorVotesQuorumFraction, GovernorTimelockControl {
+    struct Proposal {
+        address[] targets;
+        uint256[] values;
+        bytes[] calldatas;
+        string description;
+    }
+    
+    uint256[] private _proposalIds;
+    mapping(uint256 => Proposal) private _proposals;
+
+    function getProposalIds() public view returns (uint256[] memory) {
+        return _proposalIds;
+    }
+
+    function getProposalDetails(uint256 proposalId) public view returns (address[] memory, uint256[] memory, bytes[] memory, string memory) {
+        Proposal storage proposal = _proposals[proposalId];
+        return (proposal.targets, proposal.values, proposal.calldatas, proposal.description);
+    }
+
     constructor(IVotes _token, TimelockController _timelock, uint256 _quorumPercentage, uint256 _votingPeriod, uint256 _votingDelay)
         Governor("GovernorContract")
         GovernorSettings(_votingDelay /* 1 block */,_votingPeriod /* 1 week */, 0 /* proposal threshold */)
@@ -61,7 +80,10 @@ contract GovernorContract is Governor, GovernorSettings, GovernorCountingSimple,
         override(Governor, IGovernor)
         returns (uint256)
     {
-        return super.propose(targets, values, calldatas, description);
+        uint256 proposalId =  super.propose(targets, values, calldatas, description);
+        _proposals[proposalId] = Proposal(targets, values, calldatas, description);
+        _proposalIds.push(proposalId);
+        return proposalId;
     }
 
     function proposalThreshold()

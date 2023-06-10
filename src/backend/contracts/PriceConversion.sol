@@ -19,7 +19,7 @@ contract PriceConversion {
         priceFeed = AggregatorV3Interface(_pricefeed);
     } 
 
-/*     function getLatestPrice() public view returns (uint256, uint8) {
+    function getLatestPrice() public view returns (uint256, uint8) {
         (, int256 price, , , ) = priceFeed.latestRoundData();
         uint8 decimals = priceFeed.decimals();
         return (price.toUint256(), decimals);
@@ -28,8 +28,8 @@ contract PriceConversion {
     function UsdtoEth(uint _amountInUsd) public view returns (uint) {
         (uint256 eth, uint8 decimals) = getLatestPrice();
         return (_amountInUsd.mul(10**(2*decimals)).div(eth)).mul(10**10);
-    } */
-    function getLatestPrice() public pure returns (uint256, uint8) {
+    }
+    /* function getLatestPrice() public pure returns (uint256, uint8) {
         int256 price = 181928245064;
         uint8 decimals = 8;
         return (price.toUint256(), decimals);
@@ -38,5 +38,5 @@ contract PriceConversion {
     function UsdtoEth(uint _amountInUsd) public pure returns (uint) {
         (uint256 eth, uint8 decimals) = getLatestPrice();
         return (_amountInUsd.mul(10**(2*decimals)).div(eth)).mul(10**10);
-    }
+    } */
 }

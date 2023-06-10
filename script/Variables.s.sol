@@ -31,7 +31,5 @@ contract DeployVariables is Script {
     console.log("Variables contract ownership transfered to ", timeLockAddress);
 
     vm.stopBroadcast();
-
-    
   }
 }

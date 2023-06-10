@@ -14,7 +14,8 @@ contract UserRegistry {
     address governanceToken;
 
     struct User {
-        /* string name; */
+        string name;
+        string profileCID;
         uint256 level;
         bool registered;
         uint256 appreciationBalance;
@@ -57,10 +58,11 @@ contract UserRegistry {
         governanceToken = _tokenAddr;
     }
 
-    function registerUser() external {
+    function registerUser(string memory name, string memory profileCID) external {
         require(!users[msg.sender].registered, "User already registered");
         users[msg.sender] = User(
-           /*  generateRandomUsername(), */
+            name,
+            profileCID,
             1,
             true,
             0 wei,
@@ -121,11 +123,6 @@ contract UserRegistry {
 
     function isRegistered(address _user) public view returns (bool) {
         return users[_user].registered;
-    } 
-
-    function mintCaringToken() external {
-        IGovernanceToken tokenContract = IGovernanceToken(governanceToken); 
-        tokenContract.safeMint(msg.sender);
     }
 
     /* function generateRandomUsername() internal view returns (string memory) {

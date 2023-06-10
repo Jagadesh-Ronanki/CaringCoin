@@ -3,6 +3,8 @@ pragma solidity ^0.8.0;
 
 interface IUserRegistry {
     struct User {
+        string name;
+        string profileCID;
         uint256 level;
         bool registered;
         uint256 appreciationBalance;
