@@ -29,6 +29,8 @@ contract PriceConversion {
         (uint256 eth, uint8 decimals) = getLatestPrice();
         return (_amountInUsd.mul(10**(2*decimals)).div(eth)).mul(10**10);
     }
+    
+    /* Mock Test code */
     /* function getLatestPrice() public pure returns (uint256, uint8) {
         int256 price = 181928245064;
         uint8 decimals = 8;
