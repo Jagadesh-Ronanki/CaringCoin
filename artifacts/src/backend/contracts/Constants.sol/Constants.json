@@ -1,0 +1,375 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "Constants",
+  "sourceName": "src/backend/contracts/Constants.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "MIN_DELAY",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "QUORUM_PERCENTAGE",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "VOTING_DELAY",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "VOTING_PERIOD",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getGovernanceToken",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getGovernor",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getHandler",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getPostRegistry",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getPriceConversion",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getTimeLock",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getUserRegistry",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getVariables",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "governorAddr",
+      "outputs": [
+        {
+          "internalType": "address payable",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "handlerAddr",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "postRegistryAddr",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "priceConversionAddr",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_addr",
+          "type": "address"
+        }
+      ],
+      "name": "setGovernanceToken",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address payable",
+          "name": "_addr",
+          "type": "address"
+        }
+      ],
+      "name": "setGovernor",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_addr",
+          "type": "address"
+        }
+      ],
+      "name": "setHandler",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_addr",
+          "type": "address"
+        }
+      ],
+      "name": "setPostRegistry",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_addr",
+          "type": "address"
+        }
+      ],
+      "name": "setPriceConversion",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address payable",
+          "name": "_addr",
+          "type": "address"
+        }
+      ],
+      "name": "setTimeLock",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_addr",
+          "type": "address"
+        }
+      ],
+      "name": "setUserRegistry",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_addr",
+          "type": "address"
+        }
+      ],
+      "name": "setVariables",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "timeLockAddr",
+      "outputs": [
+        {
+          "internalType": "address payable",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "tokenAddr",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "userRegistryAddr",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "variablesAddr",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561000f575f80fd5b506105188061001d5f395ff3fe608060405234801561000f575f80fd5b50600436106101bb575f3560e01c80638beb8bf2116100f3578063c42cf53511610093578063e424f5e61161006e578063e424f5e61461044d578063e6b117c61461045e578063ee8a7c1514610471578063f857017014610479575f80fd5b8063c42cf53514610402578063d1ce5fad14610432578063d6159fe514610445575f80fd5b8063b0d5451b116100ce578063b0d5451b1461036b578063b1610d7e1461039b578063b6e6619a146103a3578063bac426d0146103d2575f80fd5b80638beb8bf21461033157806394aef022146103445780639f81aed714610355575f80fd5b80634fc07d751161015e5780635c490432116101395780635c490432146102c95780635ecffa3c146102db5780635fbe4d1d146102ee578063891682d214610301575f80fd5b80634fc07d7514610277578063571bfdb0146102885780635724e81f146102b8575f80fd5b80632c9eb8c9116101995780632c9eb8c9146102115780632d47d820146102435780632e1c79c3146102535780633f8a037d14610266575f80fd5b806308a89044146101bf578063119a5e96146101ef57806312e028fd14610200575b5f80fd5b6003546101d2906001600160a01b031681565b6040516001600160a01b0390911681526020015b60405180910390f35b6005546001600160a01b03166101d2565b6002546001600160a01b03166101d2565b61024161021f3660046104c0565b600780546001600160a01b0319166001600160a01b0392909216919091179055565b005b5f546001600160a01b03166101d2565b6005546101d2906001600160a01b031681565b6004546001600160a01b03166101d2565b6006546001600160a01b03166101d2565b6102416102963660046104c0565b600380546001600160a01b0319166001600160a01b0392909216919091179055565b6001546001600160a01b03166101d2565b5f546101d2906001600160a01b031681565b6002546101d2906001600160a01b031681565b6004546101d2906001600160a01b031681565b61024161030f3660046104c0565b600580546001600160a01b0319166001600160a01b0392909216919091179055565b6006546101d2906001600160a01b031681565b6007546001600160a01b03166101d2565b61035d603c81565b6040519081526020016101e6565b6102416103793660046104c0565b600180546001600160a01b0319166001600160a01b0392909216919091179055565b61035d607881565b6102416103b13660046104c0565b5f80546001600160a01b0319166001600160a01b0392909216919091179055565b6102416103e03660046104c0565b600280546001600160a01b0319166001600160a01b0392909216919091179055565b6102416104103660046104c0565b600680546001600160a01b0319166001600160a01b0392909216919091179055565b6001546101d2906001600160a01b031681565b61035d600181565b6003546001600160a01b03166101d2565b6007546101d2906001600160a01b031681565b61035d600481565b6102416104873660046104c0565b600480546001600160a01b0319166001600160a01b0392909216919091179055565b6001600160a01b03811681146104bd575f80fd5b50565b5f602082840312156104d0575f80fd5b81356104db816104a9565b939250505056fea2646970667358221220c3fd81bc2ce65d4b7e3085aa02a209b7dbc07001f0a917381a528f25b92efda164736f6c63430008140033",
+  "deployedBytecode": "0x608060405234801561000f575f80fd5b50600436106101bb575f3560e01c80638beb8bf2116100f3578063c42cf53511610093578063e424f5e61161006e578063e424f5e61461044d578063e6b117c61461045e578063ee8a7c1514610471578063f857017014610479575f80fd5b8063c42cf53514610402578063d1ce5fad14610432578063d6159fe514610445575f80fd5b8063b0d5451b116100ce578063b0d5451b1461036b578063b1610d7e1461039b578063b6e6619a146103a3578063bac426d0146103d2575f80fd5b80638beb8bf21461033157806394aef022146103445780639f81aed714610355575f80fd5b80634fc07d751161015e5780635c490432116101395780635c490432146102c95780635ecffa3c146102db5780635fbe4d1d146102ee578063891682d214610301575f80fd5b80634fc07d7514610277578063571bfdb0146102885780635724e81f146102b8575f80fd5b80632c9eb8c9116101995780632c9eb8c9146102115780632d47d820146102435780632e1c79c3146102535780633f8a037d14610266575f80fd5b806308a89044146101bf578063119a5e96146101ef57806312e028fd14610200575b5f80fd5b6003546101d2906001600160a01b031681565b6040516001600160a01b0390911681526020015b60405180910390f35b6005546001600160a01b03166101d2565b6002546001600160a01b03166101d2565b61024161021f3660046104c0565b600780546001600160a01b0319166001600160a01b0392909216919091179055565b005b5f546001600160a01b03166101d2565b6005546101d2906001600160a01b031681565b6004546001600160a01b03166101d2565b6006546001600160a01b03166101d2565b6102416102963660046104c0565b600380546001600160a01b0319166001600160a01b0392909216919091179055565b6001546001600160a01b03166101d2565b5f546101d2906001600160a01b031681565b6002546101d2906001600160a01b031681565b6004546101d2906001600160a01b031681565b61024161030f3660046104c0565b600580546001600160a01b0319166001600160a01b0392909216919091179055565b6006546101d2906001600160a01b031681565b6007546001600160a01b03166101d2565b61035d603c81565b6040519081526020016101e6565b6102416103793660046104c0565b600180546001600160a01b0319166001600160a01b0392909216919091179055565b61035d607881565b6102416103b13660046104c0565b5f80546001600160a01b0319166001600160a01b0392909216919091179055565b6102416103e03660046104c0565b600280546001600160a01b0319166001600160a01b0392909216919091179055565b6102416104103660046104c0565b600680546001600160a01b0319166001600160a01b0392909216919091179055565b6001546101d2906001600160a01b031681565b61035d600181565b6003546001600160a01b03166101d2565b6007546101d2906001600160a01b031681565b61035d600481565b6102416104873660046104c0565b600480546001600160a01b0319166001600160a01b0392909216919091179055565b6001600160a01b03811681146104bd575f80fd5b50565b5f602082840312156104d0575f80fd5b81356104db816104a9565b939250505056fea2646970667358221220c3fd81bc2ce65d4b7e3085aa02a209b7dbc07001f0a917381a528f25b92efda164736f6c63430008140033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

@@ -10,3 +10,6 @@
 [submodule "lib/openzeppelin-contracts"]
 	path = lib/openzeppelin-contracts
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "src/frontend"]
+	path = src/frontend
+	url = https://github.com/Jagadesh-Ronanki/CaringDAOClient.git

@@ -1,0 +1,110 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IUserRegistry",
+  "sourceName": "src/backend/contracts/_GovernanceToken.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "getUserDetails",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "profileCID",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "level",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "registered",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "appreciationBalance",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "contributionBalance",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "appreciationsTaken",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "appreciationsGiven",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "takenAmt",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "givenAmt",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "tokenId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "tokenHolder",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct IUserRegistry.User",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_user",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "setTokenId",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
